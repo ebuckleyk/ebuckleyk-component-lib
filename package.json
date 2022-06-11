@@ -14,15 +14,13 @@
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "changeset": "changeset",
+    "prerelease": "npm run build && npm run test && npm lint",
+    "release": "changeset publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ebuckley23/ebuckleyk-lib-components.git"
+    "url": "https://github.com/ebuckley23/ebuckleyk-component-lib.git"
   },
   "author": "Emmanuel K Buckley",
   "license": "MIT",
@@ -34,6 +32,7 @@
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.1.2",
     "@chakra-ui/storybook-addon": "^3.0.2",
+    "@changesets/cli": "^2.22.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@rollup/plugin-commonjs": "^22.0.0",
@@ -94,8 +93,5 @@
     "slate-history": "^0.66.0",
     "slate-react": "^0.81.0"
   },
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "@changesets/cli": "^2.22.0"
-  }
+  "types": "dist/index.d.ts"
 }
