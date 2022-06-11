@@ -19,6 +19,6 @@ jobs:
 
       - name: Deploy 🚀
         run: |
-          npm run deploy:to:gh -- -e docs-build --source-branch main --ci
+          npm run deploy:to:gh -- -e docs-build --ci
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
