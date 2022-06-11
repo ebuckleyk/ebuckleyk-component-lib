@@ -27,7 +27,8 @@ jobs:
       - name: create .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
-            //@ebuckleyk:registry=npm.pkg.github.com/:_authToken=$NPM_TOKEN
+            //@ebuckleyk:registry=https://npm.pkg.github.com/
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
           EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
