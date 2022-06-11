@@ -91,8 +91,8 @@ export interface FileDropProps {
 
 export interface FileItemProps {
   file: File | ServerFile,
-  onRemoveFile: <T extends File>(file: T, index: number) => void,
-  onSelectFile: <T extends File>(file: T) => void,
+  onRemoveFile?: <T extends File>(file: T, index: number) => void,
+  onSelectFile?: <T extends File>(file: T) => void,
   fileIndex: number,
   fileItemStyle?: FlexProps
 }
@@ -105,7 +105,7 @@ function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle }
       {...fileItemStyle}>
       <IconButton
         data-testid={`remove-file-${fileIndex}`}
-        onClick={() => onRemoveFile(file as File, fileIndex)}
+        onClick={() => onRemoveFile && onRemoveFile(file as File, fileIndex)}
         isRound
         aria-label='Remove file'
         icon={<CloseIcon h={3} w={3} />}
@@ -114,7 +114,7 @@ function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle }
       <Flex
         data-testid={`select-file-${fileIndex}`}
         w='100%'
-        onClick={() => onSelectFile(file as File)}
+        onClick={() => onSelectFile && onSelectFile(file as File)}
         ml={2}
         flexDir='column'>
         <Text fontSize='sm'>{file.name}</Text>
@@ -130,8 +130,8 @@ function FileDrop({
   dropInputProps,
   files = [],
   onAddFiles,
-  onRemoveFile = () => {},
-  onSelectFile = () => {},
+  onRemoveFile,
+  onSelectFile,
   onError,
   accept,
   minSize,
