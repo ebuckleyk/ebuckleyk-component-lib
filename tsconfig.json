@@ -105,5 +105,6 @@
     "node_modules", 
     "**/__tests__/*", 
     "src/stories/", 
+    "**/*.test*",
     "**/*.stories.tsx"]
 }

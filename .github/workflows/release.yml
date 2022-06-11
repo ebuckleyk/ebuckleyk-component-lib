@@ -17,7 +17,7 @@ jobs:
       - name: nodejs 14.x
         uses: actions/setup-node@v1
         with:
-          version: 14.x
+          node-version: 14.x
 
       - name: npm install
         run: npm install
