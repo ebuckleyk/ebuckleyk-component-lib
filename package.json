@@ -13,7 +13,7 @@
     "lint": "tslint -p tsconfig.json",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build:storybook": "build-storybook -o docs-build",
     "changeset": "changeset",
     "prerelease": "npm run build && npm test && npm run lint",
     "release": "changeset publish"
