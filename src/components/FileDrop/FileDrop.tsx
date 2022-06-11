@@ -33,7 +33,7 @@ const rejectStyleDefault = {
 };
 
 const fileItemStyleDefault : FlexProps = {
-  boxShadow: 'xl',
+  boxShadow: 'md',
   h: 45,
   width:'100%',
   borderRadius: 10,

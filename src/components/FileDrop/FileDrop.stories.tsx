@@ -10,7 +10,20 @@ export default {
 const Template: ComponentStory<typeof FileDrop> = (args) => <FileDrop {...args} />
 
 export const Default = Template.bind({});
+export const WithFiles = Template.bind({});
+
+const file1 = new File(['file1'], 'testfile1.pdf', {
+  type: 'application/pdf'
+});
+
+const file2 = new File(['file2'], 'image.png', {
+  type: 'application/png'
+})
 
 Default.args = {
-  files: [{ path: 'This is a test path', size: 112394, name: 'This is a test file', type: 'application/pdf'}]
+  files: []
+}
+
+WithFiles.args = {
+  files: [file1, file2]
 }
