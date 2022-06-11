@@ -25,6 +25,15 @@ jobs:
         run: npm install
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: create .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+            @ebuckleyk:registry=https://npm.pkg.github.com/
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release PR or Publish to NPM
         id: changesets
