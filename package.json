@@ -15,7 +15,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "changeset": "changeset",
-    "prerelease": "npm run build && npm run test && npm lint",
+    "prerelease": "npm run build && npm test && npm run lint",
     "release": "changeset publish"
   },
   "repository": {
