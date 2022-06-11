@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -23,17 +25,9 @@ jobs:
         run: npm install
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      
-      - name: create .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //@ebuckleyk:registry=https://npm.pkg.github.com/
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release PR or Publish to NPM
+        id: changesets
         uses: changesets/action@v1
         with:
           publish: npm run release

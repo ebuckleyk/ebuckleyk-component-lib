@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.0.0/schema.json",
-  "changelog": ["@changesets/cli/changelog", {"repo": "ebuckley23/ebuckleyk-component-lib"}],
+  "changelog": ["@changesets/cli/changelog", {"repo": "ebuckleyk/ebuckleyk-component-lib"}],
   "commit": false,
   "fixed": [],
   "linked": [],
