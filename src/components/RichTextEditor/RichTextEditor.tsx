@@ -2,15 +2,17 @@ import React, { useMemo } from "react";
 import { createEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react';
 import { withHistory } from 'slate-history';
-import isHotkey from 'is-hotkey'
+import { isHotkey } from 'is-hotkey'
 import Toolbar, { ToolbarProps } from "./components/Toolbar/Toolbar";
 import * as utils from './slate-utils';
+
+import './RichTextEditor.css'
 
 const HOTKEYS: {[key: string]: string} = {
   'mod+b': 'bold',
   'mod+i': 'italic',
   'mod+u': 'underline',
-  'mode+': 'code'
+  'mod+`': 'code'
 }
 
 export const INIT_VALUE: Descendant[] = [{
@@ -31,7 +33,7 @@ export interface RichTextEditorProps {
 
 function RichTextEditor({ 
   placeholder,
-  spellCheck,
+  spellCheck = true,
   autoFocus,
   readOnly,
   renderPlaceholder,
@@ -48,14 +50,12 @@ function RichTextEditor({
       value={initialValue}>
       <Toolbar {...toolbar} />
       <Editable
+        className='slate-editor'
         renderPlaceholder={renderPlaceholder}
         readOnly={readOnly}
         spellCheck={spellCheck}
         autoFocus={autoFocus}
         placeholder={placeholder}
-        // onDOMBeforeInput={(event: InputEvent) => {
-        //   // console.log({ event })
-        // }}
         onKeyDown={(event) => {
           for (const hotKey in HOTKEYS) {
             if (isHotkey(hotKey, event as any)) {

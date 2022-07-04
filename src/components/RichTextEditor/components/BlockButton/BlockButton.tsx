@@ -10,10 +10,14 @@ type BlockButtonProps = {
 
 const BlockButton = ({ format, icon } : BlockButtonProps) => {
   const editor = useSlate();
+  const isActive = utils.isBlockActive(editor, format)
   return (
     <IconButton
+      data-testid={`RichTextEditor_Toolbar_${format}`}
+      size={'sm'}
+      variant={isActive ? 'solid' : 'outline'}
       icon={icon}
-      isActive={utils.isBlockActive(editor, format)}
+      isActive={isActive}
       onClick={() => utils.toggleBlock(editor, format)}
       aria-label={format} />
   )

@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { act, render } from '@testing-library/react';
+import { createEditor, Descendant } from 'slate';
+import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react';
 import { FileDropProps } from '../src/components/FileDrop/FileDrop';
-import { RichTextEditorProps } from '../src/components/RichTextEditor/RichTextEditor';
+import { INIT_VALUE, RichTextEditorProps } from '../src/components/RichTextEditor/RichTextEditor';
+import { ToolbarProps } from '../src/components/RichTextEditor/components/Toolbar/Toolbar';
 
 export function setupFileDrop<P extends FileDropProps>(Component : React.ComponentType<P>, props : FileDropProps) { 
   let onRemoveFile;
@@ -37,6 +40,19 @@ export function setupRichTextEditor<P extends RichTextEditorProps>(Component : R
   function TestEnvironment() {
     return (
       <Component {...props as P} />
+    )
+  }
+  const renderObj = render(<TestEnvironment />);
+  return {...renderObj}
+}
+
+export function setupRichTextToolbar<P extends ToolbarProps>(Component : React.ComponentType<P>, props: ToolbarProps) {
+  function TestEnvironment() {
+    const editor = useMemo(() => withReact(createEditor()), []);
+    return (
+      <Slate editor={editor} value={INIT_VALUE}>
+        <Component {...props as P} />
+      </Slate>
     )
   }
   const renderObj = render(<TestEnvironment />);

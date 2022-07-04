@@ -31,7 +31,11 @@ export const isBlockActive = (editor: CustomEditor, format: string) : boolean =>
 
 export const isFormatActive = (editor: CustomEditor, format: string) => {
   const [match] = Editor.nodes(editor, {
-    // match: n => n[format] === true,
+    match: n => {
+      const t = n as any;
+      t[format] === true;
+      return t;
+    },
     mode: 'all',
   })
   return !!match
@@ -90,7 +94,7 @@ export const toggleFormat = (editor: CustomEditor, format: string) => {
 export const renderElement = (props: RenderElementProps): JSX.Element => {
   const style = { textAlign: props.element.align };
   switch (props.element.type) {
-    case 'block-quote': return <blockquote style={style} {...props.attributes}>{props.children}</blockquote>
+    case 'block-quote': return <blockquote dir={props.element.align === 'left' ? 'ltr' : props.element.align === 'right' ? 'rtl' : props.attributes.dir} style={style} {...props.attributes}>{props.children}</blockquote>
     case 'bulleted-list': return <ul style={style} {...props.attributes}>{props.children}</ul>
     case 'numbered-list': return <ol style={style} {...props.attributes}>{props.children}</ol>
     case 'list-item': return <li style={style} {...props.attributes}>{props.children}</li>

@@ -3,11 +3,9 @@ import { setupRichTextEditor } from '../../../test/setup';
 
 describe('RichTextEditor', () => {
   test('renders the RichTextEditor component', () => {
-    const { container, getByTestId } = setupRichTextEditor(RichTextEditor, {});
+    const { container } = setupRichTextEditor(RichTextEditor, {});
     const editor = container.querySelector('[data-slate-editor="true"]')
-    const toolbar = getByTestId('RichTextEditor_Toolbar');
     expect(editor).toBeDefined();
-    expect(toolbar).toBeDefined();
   })
 
   test('renders placeholder text', () => {
