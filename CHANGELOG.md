@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.1.5
+
+### Patch Changes
+
+- 07b40d9: Fix logic for checking if isFormatActive when text is selected
+
 ## 0.1.4
 
 ### Patch Changes
