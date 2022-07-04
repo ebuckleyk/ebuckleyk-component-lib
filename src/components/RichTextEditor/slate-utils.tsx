@@ -33,8 +33,7 @@ export const isFormatActive = (editor: CustomEditor, format: string) => {
   const [match] = Editor.nodes(editor, {
     match: n => {
       const t = n as any;
-      t[format] === true;
-      return t;
+      return t[format] === true;
     },
     mode: 'all',
   })
