@@ -1,7 +1,7 @@
 import React from 'react';
 import { Editor, Element as SlateElement, Transforms, Text } from 'slate';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
-import { CustomEditor, CustomElement } from "./custom-types";
+import { CustomEditor, CustomElement } from "../custom-types";
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];

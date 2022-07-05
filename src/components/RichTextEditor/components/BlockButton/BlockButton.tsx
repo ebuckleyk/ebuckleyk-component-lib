@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton } from "@chakra-ui/button";
 import { useSlate } from "slate-react"
-import * as utils from '../../slate-utils';
+import * as utils from '../../utils/slate-utils';
 
 type BlockButtonProps = {
   format: string,

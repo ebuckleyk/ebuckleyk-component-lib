@@ -4,7 +4,7 @@ import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react'
 import { withHistory } from 'slate-history';
 import { isHotkey } from 'is-hotkey'
 import Toolbar, { ToolbarProps } from "./components/Toolbar/Toolbar";
-import * as utils from './slate-utils';
+import * as utils from './utils/slate-utils';
 
 import './RichTextEditor.css'
 

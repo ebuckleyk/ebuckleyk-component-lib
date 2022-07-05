@@ -1,2 +1,2 @@
 export { default as FileDrop } from './FileDrop';
-export { default as RichTextEditor } from './RichTextEditor';
+export { default as RichTextEditor, RichTextHelpers } from './RichTextEditor';
