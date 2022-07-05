@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.2.0
+
+### Minor Changes
+
+- 67ad25a: Added RichTextEditor helpers for serializing editor text to html or plain text
+
 ## 0.1.5
 
 ### Patch Changes
