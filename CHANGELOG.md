@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.3.0
+
+### Minor Changes
+
+- 32693a9: Exposed onBlur and onFocus props for RichTextEditor and FileDrop components
+
 ## 0.2.0
 
 ### Minor Changes
