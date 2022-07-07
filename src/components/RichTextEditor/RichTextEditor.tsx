@@ -28,7 +28,9 @@ export interface RichTextEditorProps {
   renderPlaceholder?: (props: RenderPlaceholderProps) => JSX.Element,
   toolbar?: ToolbarProps,
   initialValue?: Descendant[],
-  onChange?: ((value: Descendant[]) => void) | undefined
+  onChange?: ((value: Descendant[]) => void) | undefined,
+  onFocus?: () => void,
+  onBlur?: () => void
 }
 
 function RichTextEditor({ 
@@ -39,7 +41,9 @@ function RichTextEditor({
   renderPlaceholder,
   toolbar,
   initialValue = INIT_VALUE,
-  onChange
+  onChange,
+  onBlur,
+  onFocus
 } : RichTextEditorProps) {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -50,6 +54,8 @@ function RichTextEditor({
       value={initialValue}>
       <Toolbar {...toolbar} />
       <Editable
+        onFocus={onFocus}
+        onBlur={onBlur}
         className='slate-editor'
         renderPlaceholder={renderPlaceholder}
         readOnly={readOnly}

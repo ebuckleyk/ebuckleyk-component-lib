@@ -86,7 +86,9 @@ export interface FileDropProps {
   focusedStyle?: React.CSSProperties,
   acceptedStyle?: React.CSSProperties,
   rejectedStyle?: React.CSSProperties,
-  fileItemStyle?: FlexProps
+  fileItemStyle?: FlexProps,
+  onFocus?: () => void,
+  onBlur?: () => void
 }
 
 export interface FileItemProps {
@@ -138,6 +140,8 @@ function FileDrop({
   maxFiles,
   maxSize,
   disabled,
+  onFocus,
+  onBlur,
   baseStyle = baseStyleDefault as React.CSSProperties,
   rejectedStyle = rejectStyleDefault as React.CSSProperties,
   acceptedStyle = acceptStyleDefault as React.CSSProperties,
@@ -151,7 +155,12 @@ function FileDrop({
     accept,
     disabled,
     onDropAccepted: onAddFiles,
-    onDropRejected: onError
+    onDropRejected: onError,
+    onDragEnter: onFocus,
+    onDragLeave: onBlur,
+    onFileDialogOpen: onFocus,
+    onDrop: () => onBlur,
+    onFileDialogCancel: onBlur
   });
 
   const style = useMemo(
