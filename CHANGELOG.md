@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.4.0
+
+### Minor Changes
+
+- c098cd6: Added default styling and ability to override Textarea and Toolbar
+
 ## 0.3.0
 
 ### Minor Changes
