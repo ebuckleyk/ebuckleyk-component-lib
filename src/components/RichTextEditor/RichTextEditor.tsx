@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import { createEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react';
 import { withHistory } from 'slate-history';
@@ -30,7 +30,19 @@ export interface RichTextEditorProps {
   initialValue?: Descendant[],
   onChange?: ((value: Descendant[]) => void) | undefined,
   onFocus?: () => void,
-  onBlur?: () => void
+  onBlur?: () => void,
+  style?: React.CSSProperties
+}
+
+const DefaultStyle: React.CSSProperties = {
+  border: '1px solid',
+  borderColor: '#C8C8C8',
+  padding: '8px 8px',
+  borderRadius: '5px',
+  minHeight: '80px',
+  maxHeight: '250px',
+  overflowX: 'hidden',
+  overflowY: 'auto'
 }
 
 function RichTextEditor({ 
@@ -43,7 +55,8 @@ function RichTextEditor({
   initialValue = INIT_VALUE,
   onChange,
   onBlur,
-  onFocus
+  onFocus,
+  style = DefaultStyle
 } : RichTextEditorProps) {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -54,6 +67,9 @@ function RichTextEditor({
       value={initialValue}>
       <Toolbar {...toolbar} />
       <Editable
+        style={style}
+        data-testid='RichTextEditor_Textbox'
+        role='textbox'
         onFocus={onFocus}
         onBlur={onBlur}
         className='slate-editor'

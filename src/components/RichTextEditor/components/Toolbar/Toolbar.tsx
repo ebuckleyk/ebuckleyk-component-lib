@@ -26,7 +26,8 @@ type ToolbarOptionsConfig = {
 
 export type ToolbarProps = {
   show?: boolean,
-  config?: ToolbarOptionsConfig
+  config?: ToolbarOptionsConfig,
+  style?: React.CSSProperties
 }
 
 export const DefaultToolbarConfig = {
@@ -49,14 +50,21 @@ export const DefaultToolbarConfig = {
   'block-quote': true
 }
 
+const DefaultStyle: React.CSSProperties = {
+  paddingTop: 10,
+  paddingBottom: 10,
+  width: '100%'
+}
+
 const Toolbar = ({ 
   show = true,
-  config = DefaultToolbarConfig
+  config = DefaultToolbarConfig,
+  style = DefaultStyle
 } : ToolbarProps) => {
   if (!show) return null;
 
   return (
-    <Flex data-testid='RichTextEditor_Toolbar' w={'100%'}>
+    <Flex data-testid='RichTextEditor_Toolbar' style={style}>
       <Stack direction={{sm: 'column', md: 'row'}}>
         <HStack spacing={1}>
           {config.bold && <MarkButton icon={<RiBold />} format='bold' />}
