@@ -7,6 +7,6 @@ export const parameters = {
     },
   },
   chakra: {
-    resetCSS: false
+    resetCSS: true
   }
 }
