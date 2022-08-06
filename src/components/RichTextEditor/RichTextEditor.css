@@ -1,25 +1,25 @@
-.slate-editor > p {
+.slate-editor p {
   margin: 0;
 }
 
-.slate-editor > pre {
+.slate-editor pre {
   padding: 10px;
   background-color: #eee;
   white-space: pre-wrap;
 }
 
-.slate-editor > :not(pre) > code {
+.slate-editor :not(pre) > code {
   font-family: monospace;
   background-color: #eee;
   padding: 3px;
 }
 
-.slate-editor > img {
+.slate-editor img {
   max-width: 100%;
   max-height: 20em;
 }
 
-.slate-editor > blockquote {
+.slate-editor blockquote {
   border-left: 2px solid #ddd;
   margin-left: 0;
   margin-right: 0;
@@ -28,23 +28,23 @@
   font-style: italic;
 }
 
-.slate-editor > blockquote[dir=rtl] {
+.slate-editor blockquote[dir=rtl] {
   border-left: none;
   padding-left: 0;
   padding-right: 10px;
   border-right: 2px solid #ddd;
 }
 
-.slate-editor > table {
+.slate-editor table {
   border-collapse: collapse;
 }
 
-.slate-editor > td {
+.slate-editor td {
   padding: 10px;
   border: 2px solid #ddd;
 }
 
-.slate-editor > input {
+.slate-editor input {
   box-sizing: border-box;
   font-size: 0.85em;
   width: 100%;
@@ -53,16 +53,16 @@
   background: #fafafa;
 }
 
-.slate-editor > input:focus {
+.slate-editor input:focus {
   outline: 0;
   border-color: blue;
 }
 
-.slate-editor > iframe {
+.slate-editor iframe {
   width: 100%;
   border: 1px solid #eee;
 }
 
-.slate-editor > [data-slate-editor] > * + * {
+.slate-editor [data-slate-editor] > * + * {
   margin-top: 1em;
 }
