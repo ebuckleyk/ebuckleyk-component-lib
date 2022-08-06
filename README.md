@@ -1,5 +1,8 @@
 React component library for ebuckleyk applications
 
+### Demo
+https://ebuckleyk.github.io/ebuckleyk-component-lib
+
 ### How to update library
 1. Run `npm run lint` _Safety check to prevent publish from failing_
 2. Run `npx changeset`
