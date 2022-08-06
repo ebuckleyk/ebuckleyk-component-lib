@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.5.0
+
+### Minor Changes
+
+- a4ed742: Updated CSS to only apply to supported markdown operations within slate-editor
+
 ## 0.4.1
 
 ### Patch Changes
