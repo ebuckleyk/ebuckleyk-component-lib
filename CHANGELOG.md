@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.4.1
+
+### Patch Changes
+
+- 202e2c1: Change CSS from direct children to descendants
+
 ## 0.4.0
 
 ### Minor Changes
