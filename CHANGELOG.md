@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.6.0
+
+### Minor Changes
+
+- 4c89ee1: Changed devDependencies to peerDependencies
+
 ## 0.5.0
 
 ### Minor Changes
