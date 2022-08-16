@@ -16,10 +16,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: nodejs 14.x
+      - name: nodejs 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 18.x
 
       - name: npm install
         run: npm install
