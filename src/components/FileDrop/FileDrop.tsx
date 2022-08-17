@@ -1,5 +1,6 @@
-import { Box, Flex, FlexProps, IconButton, Stack, StylesProvider, Text } from '@chakra-ui/react';
 import React, { ReactNode, useMemo } from 'react';
+import { Box, Flex, FlexProps, Stack, Text } from '@chakra-ui/layout';
+import { IconButton } from '@chakra-ui/button';
 import { useDropzone, DropzoneRootProps, DropzoneInputProps, FileRejection, Accept } from 'react-dropzone';
 import { CloseIcon } from '@chakra-ui/icons';
 

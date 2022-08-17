@@ -10,6 +10,7 @@ import dts from "rollup-plugin-dts";
 import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import bundleSize from 'rollup-plugin-bundle-size';
 
 const packageJson = require('./package.json');
 
@@ -31,7 +32,8 @@ export default [
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       postcss(),
-      terser()
+      terser(),
+      bundleSize()
     ]
   },
   {
