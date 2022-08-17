@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.8.0
+
+### Minor Changes
+
+- 3c66629: Moved react and react-dom to rollup externals to ensure no conflict with hooks for React 18
+
 ## 0.7.0
 
 ### Minor Changes
