@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.7.0
+
+### Minor Changes
+
+- 2a7519a: Reduced package size. Support minimum node 18.x
+
 ## 0.6.0
 
 ### Minor Changes
