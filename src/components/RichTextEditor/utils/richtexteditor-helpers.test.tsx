@@ -94,4 +94,18 @@ describe('richtexteditor-helpers', () => {
     expect(str).toContain('<pre><code>{ var codeblock = true; }</code></pre>')
     expect(str).toContain('<u>This is underlined text.</u>')
   })
+
+  test('can serialize null or undefined editor text to plaintext', () => {
+    const str = serializeToPlainText(undefined as any);
+    const str2 = serializeToPlainText(null as any);
+    expect(str).toBeFalsy();
+    expect(str2).toBeFalsy();
+  })
+
+  test('can serialize null or undefined editor text to html', () => {
+    const str = serializeToHTML(undefined as any);
+    const str2 = serializeToHTML(null as any);
+    expect(str).toBeFalsy();
+    expect(str2).toBeFalsy();
+  })
 })

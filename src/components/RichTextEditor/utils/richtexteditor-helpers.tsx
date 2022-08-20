@@ -1,7 +1,8 @@
 import escapeHtml from 'escape-html';
 import { Descendant, Node, Text } from 'slate';
 
-export const serializeToPlainText = (nodes: Node[]) => {
+export const serializeToPlainText = (nodes: Node[]): string => {
+  if (!nodes?.length) return '';
   return nodes.map(n => Node.string(n)).join('\n');
 }
 
@@ -32,5 +33,6 @@ const _serialize = (node: Descendant) : string => {
   }
 }
 export const serializeToHTML = (nodes: Node[]) : string => {
+  if(!nodes?.length) return '';
   return nodes.map(n => _serialize(n as any)).join('');
 }
