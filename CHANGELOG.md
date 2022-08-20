@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.10.0
+
+### Minor Changes
+
+- a8347c6: Support for node lts instead of latest
+
 ## 0.9.0
 
 ### Minor Changes
