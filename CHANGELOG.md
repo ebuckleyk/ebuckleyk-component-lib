@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.10.1
+
+### Patch Changes
+
+- f787195: Fixed called map on an undefined object when serializing to plaintext or html
+
 ## 0.10.0
 
 ### Minor Changes
