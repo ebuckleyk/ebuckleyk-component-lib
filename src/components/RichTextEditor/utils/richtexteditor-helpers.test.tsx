@@ -96,16 +96,28 @@ describe('richtexteditor-helpers', () => {
   })
 
   test('can serialize null or undefined editor text to plaintext', () => {
-    const str = serializeToPlainText(undefined as any);
-    const str2 = serializeToPlainText(null as any);
+    const undefinedValue: any[] = [{"type": "paragraph", "children": [{"text": undefined }] }];
+    const nullValue: any[] = [{"type": "paragraph", "children": [{"text": null }] }];
+    const str = serializeToPlainText(undefinedValue);
+    const str2 = serializeToPlainText(nullValue);
+    const str3 = serializeToPlainText(null as any);
+    const str4 = serializeToPlainText(undefined as any);
     expect(str).toBeFalsy();
     expect(str2).toBeFalsy();
+    expect(str3).toBeFalsy();
+    expect(str4).toBeFalsy();
   })
 
   test('can serialize null or undefined editor text to html', () => {
-    const str = serializeToHTML(undefined as any);
-    const str2 = serializeToHTML(null as any);
+    const undefinedValue: any[] = [{"type": "paragraph", "children": [{"text": undefined }] }];
+    const nullValue: any[] = [{"type": "paragraph", "children": [{"text": null }] }];
+    const str = serializeToHTML(undefinedValue);
+    const str2 = serializeToHTML(nullValue);
+    const str3 = serializeToPlainText(null as any);
+    const str4 = serializeToPlainText(undefined as any);
     expect(str).toBeFalsy();
     expect(str2).toBeFalsy();
+    expect(str3).toBeFalsy();
+    expect(str4).toBeFalsy();
   })
 })

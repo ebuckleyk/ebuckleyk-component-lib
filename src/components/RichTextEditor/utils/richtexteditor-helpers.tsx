@@ -3,7 +3,7 @@ import { Descendant, Node, Text } from 'slate';
 
 export const serializeToPlainText = (nodes: Node[]): string => {
   if (!nodes?.length) return '';
-  return nodes.map(n => Node.string(n)).join('\n');
+  return nodes.map(n => Node.isNode(n) ? Node.string(n) : '').join('\n');
 }
 
 const _serialize = (node: Descendant) : string => {
@@ -16,7 +16,7 @@ const _serialize = (node: Descendant) : string => {
     return str;
   }
 
-  const children = node.children.map(n => _serialize(n as any)).join('');
+  const children = node.children?.map(n => _serialize(n as any)).join('');
 
   switch (node.type) {
     case 'block-quote': return `<blockquote>${children}</blockquote>`;
@@ -34,5 +34,5 @@ const _serialize = (node: Descendant) : string => {
 }
 export const serializeToHTML = (nodes: Node[]) : string => {
   if(!nodes?.length) return '';
-  return nodes.map(n => _serialize(n as any)).join('');
+  return nodes.map(n => Node.isNode(n) ? _serialize(n as any) : '').join('');
 }
