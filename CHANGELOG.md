@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.10.2
+
+### Patch Changes
+
+- d73db30: Fixed issue with serialization when text node is null or undefined
+
 ## 0.10.1
 
 ### Patch Changes
