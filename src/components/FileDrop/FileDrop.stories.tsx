@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { EditIcon } from '@chakra-ui/icons';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import FileDrop from './FileDrop';
 
@@ -16,6 +17,7 @@ const Template: ComponentStory<typeof FileDrop> = (args) => {
 
 export const Default = Template.bind({});
 export const WithFiles = Template.bind({});
+export const WithCustomDropAreaLabel = Template.bind({});
 
 const file1 = new File(['file1'], 'testfile1.pdf', {
   type: 'application/pdf'
@@ -31,4 +33,12 @@ Default.args = {
 
 WithFiles.args = {
   files: [file1, file2]
+}
+
+WithCustomDropAreaLabel.args = {
+  dropAreaComponent: <EditIcon _hover={{ cursor: 'pointer'}} />,
+  displayFileArea: false,
+  dropAreaProps: { width: 'fit-content' },
+  baseStyle: {},
+  onAddFiles: (files) => console.log({ files })
 }

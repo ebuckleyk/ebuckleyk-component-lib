@@ -73,7 +73,7 @@ export interface FileDropProps {
   onAddFiles?: <T extends File>(files: T[]) => void,
   dropAreaProps?: DropzoneRootProps,
   dropInputProps?: DropzoneInputProps,
-  dropAreaLabel?: ReactNode | string,
+  dropAreaComponent?: ReactNode | string,
   files?: File[] | ServerFile[],
   onRemoveFile?: <T extends File>(file: T, index: number) => void,
   onSelectFile?: <T extends File>(file: T) => void,
@@ -89,7 +89,8 @@ export interface FileDropProps {
   rejectedStyle?: React.CSSProperties,
   fileItemStyle?: FlexProps,
   onFocus?: () => void,
-  onBlur?: () => void
+  onBlur?: () => void,
+  displayFileArea?: boolean
 }
 
 export interface FileItemProps {
@@ -100,10 +101,36 @@ export interface FileItemProps {
   fileItemStyle?: FlexProps
 }
 
+type FileDropContainerProps = {
+  children: React.ReactNode,
+  style: React.CSSProperties
+}
+
+type AreaFileProps = {
+  onRemoveFile?: <T extends File>(file: T, index: number) => void,
+  onSelectFile?: <T extends File>(file: T) => void,
+  styles?: FlexProps,
+  files: File[] | ServerFile[],
+  isVisible?: boolean
+}
+
+function FileDropContainer({ children, style }: FileDropContainerProps) {
+  return (
+    <div
+      style={style}
+      className='filedrop-wrapper'
+      data-testid='FileDropContainer'>
+      {children}
+    </div>
+  )
+}
 
 function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle } : FileItemProps) {
   return (
     <Flex
+      _hover={{
+        cursor: onSelectFile ? 'pointer' : 'default'
+      }}
       data-testid={`file-${fileIndex}`}
       {...fileItemStyle}>
       <IconButton
@@ -127,8 +154,23 @@ function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle }
   )
 }
 
+function AreaFiles({ files = [], styles, onRemoveFile, onSelectFile, isVisible = true } : AreaFileProps) {
+  if (!isVisible) return null;
+  return (
+    <Stack 
+      data-testid='FileDrop_FileArea'
+      w='100%'>
+      {files.map((f, idx) => {
+        return (
+          <FileItem key={idx} fileItemStyle={styles} fileIndex={idx} file={f} onRemoveFile={onRemoveFile} onSelectFile={onSelectFile} />
+        )
+      })}
+    </Stack>
+  )
+}
+
 function FileDrop({
-  dropAreaLabel = <DefaultAreaLabel />,
+  dropAreaComponent = <DefaultAreaLabel />,
   dropAreaProps = defaultAreaProps,
   dropInputProps,
   files = [],
@@ -143,6 +185,7 @@ function FileDrop({
   disabled,
   onFocus,
   onBlur,
+  displayFileArea = true,
   baseStyle = baseStyleDefault as React.CSSProperties,
   rejectedStyle = rejectStyleDefault as React.CSSProperties,
   acceptedStyle = acceptStyleDefault as React.CSSProperties,
@@ -164,7 +207,7 @@ function FileDrop({
     onFileDialogCancel: onBlur
   });
 
-  const style = useMemo(
+  const style: React.CSSProperties = useMemo(
     () => ({
       ...baseStyle,
       ...(isFocused ? focusedStyle : {}),
@@ -175,20 +218,22 @@ function FileDrop({
   );
 
   return (
-    <Box data-testid='FileDropContainer' style={style as React.CSSProperties} className='ebuckleyk-wrapper'>
+    <FileDropContainer style={style}>
       <Box
         data-testid='FileDrop_DropArea'
         className='ebuckleyk-filedroparea'
         {...getRootProps(dropAreaProps)}>
         <input data-testid='FileDrop_Input' {...getInputProps(dropInputProps)} />
-        {dropAreaLabel}
+        {dropAreaComponent}
       </Box>
-      <Stack 
-        data-testid='FileDrop_FileArea'
-        w='100%'>
-        {files?.map((f, idx) => (<FileItem key={idx} fileItemStyle={fileItemStyle} fileIndex={idx} file={f} onRemoveFile={onRemoveFile} onSelectFile={onSelectFile} />))}
-      </Stack>
-    </Box>
+      <AreaFiles
+        isVisible={displayFileArea}
+        files={files}
+        styles={fileItemStyle}
+        onRemoveFile={onRemoveFile}
+        onSelectFile={onSelectFile}
+      />
+    </FileDropContainer>
   )
 }
 

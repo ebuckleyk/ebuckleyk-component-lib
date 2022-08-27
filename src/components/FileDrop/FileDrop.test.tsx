@@ -5,6 +5,7 @@ import { setupFileDrop } from '../../../test/setup'
 import FileDrop from './FileDrop';
 import { act } from 'react-dom/test-utils';
 import { FileRejection } from 'react-dropzone';
+import { EditIcon } from '@chakra-ui/icons';
 
 const f = {
   path: '',
@@ -97,5 +98,36 @@ describe('FileDrop', () => {
     const fileArea = getByTestId('FileDrop_FileArea');
     expect(fileArea.firstChild).toBeFalsy();
     expect(error).toBeDefined();
+  })
+
+  test('can accept custom display component', async () => {
+    const { getByTestId } = setupFileDrop(FileDrop, {
+      dropAreaComponent: <EditIcon data-testid='edit-icon' />,
+      displayFileArea: false,
+      dropAreaProps: { width: 'fit-content' },
+      baseStyle: {}
+    })
+
+    const customComponent = getByTestId('edit-icon');
+    expect(customComponent).toBeTruthy();
+  })
+
+  test('can exclude file drop area', async () => {
+    const file = new File(['file'], 'testfile.pdf', {
+      type: 'application/pdf'
+    });
+    const { queryByTestId, getByTestId, onAddFiles } = setupFileDrop(FileDrop, {displayFileArea: false})
+    const inputEl = getByTestId('FileDrop_Input');
+
+    Object.defineProperty(inputEl, 'files', {
+      value: [file]
+    });
+
+    await act(async () => {
+      fireEvent.drop(inputEl);
+    })
+    const fileArea = queryByTestId('FileDrop_FileArea')
+    expect(onAddFiles).toBeCalled();
+    expect(fileArea).toBeFalsy();
   })
 })
