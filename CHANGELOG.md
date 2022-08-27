@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.11.0
+
+### Minor Changes
+
+- af67ad8: Added capability to render a custom ReactComponent as the drop area
+
 ## 0.10.2
 
 ### Patch Changes
