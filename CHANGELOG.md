@@ -1,5 +1,11 @@
 # @ebuckleyk/ebuckleyk-component-lib
 
+## 0.12.1
+
+### Patch Changes
+
+- 2d1b9b2: Propogate disable functionality down to individual file item
+
 ## 0.12.0
 
 ### Minor Changes
