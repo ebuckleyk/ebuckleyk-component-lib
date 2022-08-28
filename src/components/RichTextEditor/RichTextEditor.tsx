@@ -3,10 +3,14 @@ import { createEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { isHotkey } from 'is-hotkey'
+import { Box } from '@chakra-ui/layout';
+import DOMPurify from 'dompurify';
 import Toolbar, { ToolbarProps } from "./components/Toolbar/Toolbar";
 import * as utils from './utils/slate-utils';
+import { RichTextHelpers } from '.';
 
 import './RichTextEditor.css'
+
 
 const HOTKEYS: {[key: string]: string} = {
   'mod+b': 'bold',
@@ -20,7 +24,7 @@ export const INIT_VALUE: Descendant[] = [{
   children: [{ text: '' }]
 }];
 
-export interface RichTextEditorProps {
+export type RichTextEditorProps = {
   placeholder?: string,
   spellCheck?: boolean,
   autoFocus?: boolean,
@@ -31,7 +35,8 @@ export interface RichTextEditorProps {
   onChange?: ((value: Descendant[]) => void) | undefined,
   onFocus?: () => void,
   onBlur?: () => void,
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
+  disabled?: boolean
 }
 
 const DefaultStyle: React.CSSProperties = {
@@ -45,11 +50,28 @@ const DefaultStyle: React.CSSProperties = {
   overflowY: 'auto'
 }
 
+function ReadOnlyRichTextEditor({ value, style }: {value: Descendant[], style: React.CSSProperties }) {
+  const richtext = value ? RichTextHelpers.serializeToHTML(value) : '<p></p>';
+  return (
+    <Box
+      data-testid='RichTextEditor_Textbox readonly'
+      className='slate-editor readonly'>
+      <div
+        style={style}
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(richtext)
+        }}
+      />
+    </Box>
+  )
+}
+
 function RichTextEditor({ 
   placeholder,
   spellCheck = true,
   autoFocus,
   readOnly,
+  disabled,
   renderPlaceholder,
   toolbar,
   initialValue = INIT_VALUE,
@@ -59,6 +81,8 @@ function RichTextEditor({
   style = DefaultStyle
 } : RichTextEditorProps) {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+
+  if (readOnly) return <ReadOnlyRichTextEditor value={initialValue} style={style} />
 
   return (
     <Slate
@@ -74,7 +98,7 @@ function RichTextEditor({
         onBlur={onBlur}
         className='slate-editor'
         renderPlaceholder={renderPlaceholder}
-        readOnly={readOnly}
+        readOnly={disabled}
         spellCheck={spellCheck}
         autoFocus={autoFocus}
         placeholder={placeholder}

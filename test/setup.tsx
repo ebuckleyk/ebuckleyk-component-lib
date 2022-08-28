@@ -1,7 +1,8 @@
+import '@testing-library/jest-dom';
 import React, { useState, useMemo } from 'react'
 import { act, render } from '@testing-library/react';
-import { createEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact, RenderPlaceholderProps } from 'slate-react';
+import { createEditor } from 'slate';
+import { Slate, withReact } from 'slate-react';
 import { FileDropProps } from '../src/components/FileDrop/FileDrop';
 import { INIT_VALUE, RichTextEditorProps } from '../src/components/RichTextEditor/RichTextEditor';
 import { ToolbarProps } from '../src/components/RichTextEditor/components/Toolbar/Toolbar';

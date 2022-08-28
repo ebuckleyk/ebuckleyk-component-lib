@@ -34,5 +34,6 @@ const _serialize = (node: Descendant) : string => {
 }
 export const serializeToHTML = (nodes: Node[]) : string => {
   if(!nodes?.length) return '';
-  return nodes.map(n => Node.isNode(n) ? _serialize(n as any) : '').join('');
+  const result = nodes.map(n => Node.isNode(n) ? _serialize(n as any) : '').join('');
+  return result ? `<span data-testid='slate-serialized-html'>${result}</span>` : '';
 }

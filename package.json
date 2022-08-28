@@ -20,7 +20,7 @@
     "prerelease": "npm run build && npm test && npm run lint",
     "release": "changeset publish",
     "deploy:to:gh": "storybook-to-ghpages",
-    "coverage": "jest --coverage"
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -49,7 +49,9 @@
     "@storybook/react": "^6.1.21",
     "@storybook/storybook-deployer": "^2.8.3",
     "@storybook/testing-library": "0.0.13",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
+    "@types/dompurify": "^2.3.4",
     "@types/escape-html": "^1.0.2",
     "@types/jest": "^28.1.1",
     "@types/react": "^18.0.12",
@@ -82,7 +84,6 @@
     "@chakra-ui/icons": ">=2.0.1",
     "@chakra-ui/layout": ">=2.1.5",
     "@emotion/styled": ">=11.8.1",
-    "escape-html": ">=1.0.3",
     "framer-motion": ">=6.3.10",
     "react": ">=17.0.0",
     "react-dropzone": ">=14.2.1",
@@ -91,5 +92,9 @@
     "slate-history": ">=0.66.0",
     "slate-react": ">=0.81.0"
   },
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "dompurify": "^2.4.0",
+    "escape-html": "^1.0.3"
+  }
 }

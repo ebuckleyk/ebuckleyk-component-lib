@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof FileDrop> = (args) => {
 export const Default = Template.bind({});
 export const WithFiles = Template.bind({});
 export const WithCustomDropAreaLabel = Template.bind({});
+export const ReadOnly = Template.bind({});
 
 const file1 = new File(['file1'], 'testfile1.pdf', {
   type: 'application/pdf'
@@ -41,4 +42,9 @@ WithCustomDropAreaLabel.args = {
   dropAreaProps: { width: 'fit-content' },
   baseStyle: {},
   onAddFiles: (files) => console.log({ files })
+}
+
+ReadOnly.args = {
+  files: [file1, file2],
+  readOnly: true
 }

@@ -130,4 +130,32 @@ describe('FileDrop', () => {
     expect(onAddFiles).toBeCalled();
     expect(fileArea).toBeFalsy();
   })
+
+  test('only displays added files when in readOnly mode', async () => {
+    const file = new File(['file'], 'testfile.pdf', {
+      type: 'application/pdf'
+    });
+
+    const { queryByTestId, getByTestId, onSelectFile } = setupFileDrop(FileDrop, {
+      files: [file],
+      readOnly: true,
+      onSelectFile: () => {}
+    })
+
+    const readOnlyFileArea = getByTestId('FileDrop_FileArea readonly');
+    const firstFile = getByTestId('file-0')
+    const firstFileRemoveBtn = queryByTestId('remove-file-0');
+    const inputEl = queryByTestId('FileDrop_Input');
+    const selectFirstFile = getByTestId('select-file-0')
+
+    await act(async () => {
+      fireEvent.click(selectFirstFile);
+    })
+
+    expect(firstFileRemoveBtn).toBeFalsy();
+    expect(readOnlyFileArea).toBeTruthy();
+    expect(firstFile).toBeTruthy();
+    expect(inputEl).toBeFalsy();
+    expect(onSelectFile).toBeCalledTimes(1);
+  })
 })
