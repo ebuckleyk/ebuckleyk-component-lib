@@ -99,7 +99,8 @@ export type FileItemProps = {
   onRemoveFile?: <T extends File>(file: T, index: number) => void,
   onSelectFile?: <T extends File>(file: T) => void,
   fileIndex: number,
-  fileItemStyle?: FlexProps
+  fileItemStyle?: FlexProps,
+  disabled?: boolean
 }
 
 type FileDropContainerProps = {
@@ -126,8 +127,8 @@ function FileDropContainer({ children, style }: FileDropContainerProps) {
   )
 }
 
-function FileRemovalIcon({ onRemoveFile, fileIndex, file } : Pick<FileItemProps, 'onRemoveFile' | 'fileIndex' | 'file' >) {
-  if (!onRemoveFile) return null;
+function FileRemovalIcon({ onRemoveFile, fileIndex, file, disabled } : Pick<FileItemProps, 'onRemoveFile' | 'fileIndex' | 'file' | 'disabled' >) {
+  if (!onRemoveFile || disabled) return null;
   return (
     <IconButton
       data-testid={`remove-file-${fileIndex}`}
@@ -140,7 +141,7 @@ function FileRemovalIcon({ onRemoveFile, fileIndex, file } : Pick<FileItemProps,
   )
 }
 
-function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle } : FileItemProps) {
+function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle, disabled } : FileItemProps) {
   return (
     <Flex
       _hover={{
@@ -148,7 +149,7 @@ function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle }
       }}
       data-testid={`file-${fileIndex}`}
       {...fileItemStyle}>
-      <FileRemovalIcon onRemoveFile={onRemoveFile} file={file} fileIndex={fileIndex} />
+      <FileRemovalIcon onRemoveFile={onRemoveFile} file={file} fileIndex={fileIndex} disabled={disabled} />
       <Flex
         data-testid={`select-file-${fileIndex}`}
         w='100%'
@@ -162,7 +163,7 @@ function FileItem({ file, fileIndex, onRemoveFile, onSelectFile, fileItemStyle }
   )
 }
 
-function AreaFiles({ files = [], styles, onRemoveFile, onSelectFile, isVisible = true } : AreaFileProps) {
+function AreaFiles({ files = [], styles, onRemoveFile, onSelectFile, isVisible = true, disabled } : AreaFileProps & Pick<FileDropProps, 'disabled'>) {
   if (!isVisible) return null;
   return (
     <Stack 
@@ -170,7 +171,14 @@ function AreaFiles({ files = [], styles, onRemoveFile, onSelectFile, isVisible =
       w='100%'>
       {files.map((f, idx) => {
         return (
-          <FileItem key={idx} fileItemStyle={styles} fileIndex={idx} file={f} onRemoveFile={onRemoveFile} onSelectFile={onSelectFile} />
+          <FileItem
+            disabled={disabled}
+            key={idx}
+            fileItemStyle={styles}
+            fileIndex={idx}
+            file={f}
+            onRemoveFile={onRemoveFile}
+            onSelectFile={onSelectFile} />
         )
       })}
     </Stack>
@@ -257,6 +265,7 @@ function FileDrop({
         {dropAreaComponent}
       </Box>
       <AreaFiles
+        disabled={disabled}
         isVisible={displayFileArea}
         files={files}
         styles={fileItemStyle}
